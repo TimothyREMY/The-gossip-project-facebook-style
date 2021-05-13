@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @gossip.title %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @gossip.content %>
+</p>
+
+<strong>Le gossiper</strong>
+  <% gossiper = User.find(@gossip.user_id)  %>
+  <%= link_to gossiper.first_name, user_path(gossiper.id) %>
+
+  <br><br>
+
+<%= link_to 'Edit', edit_gossip_path(@gossip) %> |
+<%= link_to 'Back', gossips_path %>
+
+<p>
+<br><br>
+  <strong>Commentaires</strong>
+  <br>
+  <% comments = Comment.where(gossip_id: params[:id]) %>
+  <br>
+    <% comments.each do |comment| %>
+      <% user_comment = comment.user %>
+      <%= user_comment.first_name %>
+      <br>
+      <%= comment.content %>
+      
+      <% end %>
+
+         
+</p>
