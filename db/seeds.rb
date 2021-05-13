@@ -20,19 +20,19 @@ tags = []
 comments = []
 
 10.times do
-  city = City.create(name: Faker::Address.city, zip_code: Faker::Number.number(digits: 5))
+  city = City.create(name: Faker::Nation.capital_city, zip_code: Faker::Number.number(digits: 5))
   cities << city
   puts "CITY ====> #{city.name} created"
 end
 
 10.times do
-  user = User.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: Faker::Internet.email, description:Faker::Lorem.sentence(word_count: 50), age: Faker::Number.within(range: 18..99), city: cities.sample, password_digest: Faker::Internet.password)
+  user = User.create(first_name: Faker::TvShows::NewGirl.character, last_name: Faker::TvShows::GameOfThrones.house, email: Faker::Internet.email, description:Faker::Lorem.sentence(word_count: 50), age: Faker::Number.within(range: 18..99), city_id: City.all.sample.id, password_digest: Faker::Internet.password)
   users << user
   puts "USER  ====> #{user.first_name} created"
 end
 
 20.times do
-  gossip = Gossip.create(title: Faker::TvShows::Friends.location, content:Faker::TvShows::Friends.quote, user: users.sample)
+  gossip = Gossip.create(title: Faker::TvShows::Friends.location, content:Faker::TvShows::Friends.quote, user_id: User.all.sample.id)
   gossips << gossip
   puts "GOSSIP  ====> #{gossip.title} a été créé"
 end
@@ -49,7 +49,7 @@ Gossip.all.each do |gos|
 end
 
 40.times do
-  comment=Comment.create(content: Faker::Lorem.sentence(word_count: 10), gossip_id: gossips.sample.id, user: users.sample)
+  comment=Comment.create(content: Faker::TvShows::GameOfThrones.quote, gossip_id: Gossip.all.sample.id, user_id: User.all.sample.id)
   comments << comment
   puts "COMMENTAIRE ===> le commentaire n°#{comment.id} a été créé"
 end

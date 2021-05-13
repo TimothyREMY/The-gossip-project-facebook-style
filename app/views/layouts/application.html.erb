@@ -15,7 +15,7 @@
   <body>
     <header>
       <nav class="navbar navbar-expand-lg navbar-light bg-dark">
-        <a class="navbar-brand text-light" href="#">The Gossip Project Views</a>
+        <a class="navbar-brand text-light" href="/">The Gossip Project Views</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -33,6 +33,19 @@
             </li>
             <li class="nav-item">
               <a class="nav-link text-secondary"<%= link_to "Ville", city_path %>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-secondary"<%= link_to "Devenir gossiper", new_user_path %>
+            </li>
+            <li class="nav-item">
+              <% if current_user %>
+                <a class="nav-link text-secondary"<%= link_to     current_user.first_name, users_path(current_user) %>
+              <% else %>
+                <a class="nav-link text-secondary"<%= link_to     "Connexion", new_session_path %>
+                
+                <% end %>
+                
+
             </li>
             
           </ul>
