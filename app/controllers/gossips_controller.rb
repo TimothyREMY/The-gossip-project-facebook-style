@@ -1,6 +1,6 @@
 class GossipsController < ApplicationController
   before_action :set_gossip, only: %i[ show edit update destroy ]
-  before_action :authenticate_user, only: [:new]
+  before_action :authenticate_user, only: [:new, :show]
   # GET /gossips or /gossips.json
   def index
     @gossips = Gossip.all
@@ -10,6 +10,7 @@ class GossipsController < ApplicationController
   def show
     @comments = Comment.all
     @user = User.all
+    current_user = @gossip.user
   end
 
   # GET /gossips/new
